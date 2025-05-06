@@ -1,5 +1,4 @@
 #include <getopt.h>
-#include <getopt.h>
 /*
  * Copyright (c) Christos Zoulas 2003.
  * All Rights Reserved.
@@ -76,6 +75,8 @@ slurp(FILE *fp, size_t *final_len)
 	*final_len = s - l;
 	return xrealloc(l, s - l);
 }
+
+#if ((defined _MSC_VER) && (!defined __clang__))
 int setenv(const char* name, const char* value, int overwrite)
 {
 	int errcode = 0;
@@ -86,7 +87,9 @@ int setenv(const char* name, const char* value, int overwrite)
 	}
 	return _putenv_s(name, value);
 }
-
+#else
+// nothing since it's posix, should have setenv and getenv by now.
+#endif
 int
 main(int argc, char **argv)
 {
@@ -99,7 +102,6 @@ main(int argc, char **argv)
 
 	setenv("TZ", "UTC", 1);
 	tzset();
-
 
 	prog = strrchr(argv[0], '/');
 	if (prog)

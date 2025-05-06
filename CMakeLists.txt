@@ -57,22 +57,23 @@ STRING(REPLACE "X.YY" ${FILE_VERSION_WITHOUT_DOT} MAGIC_H_CONTENT_NEW "${MAGIC_H
 FILE(WRITE file/src/magic.h "${MAGIC_H_CONTENT_NEW}")
 
 
-FILE(READ file/src/readelf.c READELF_C_CONTENT)
-STRING(CONCAT READELF_C_CONTENT_NEW "#include <dirent.h>\n" "${READELF_C_CONTENT}")
-FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/readelf.c "${READELF_C_CONTENT_NEW}")
 
 FILE(READ file/src/magic.c MAGIC_C_CONTENT)
 STRING(CONCAT MAGIC_C_CONTENT_NEW "#include <dirent.h>\n" "${MAGIC_C_CONTENT}")
 FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/magic.c "${MAGIC_C_CONTENT_NEW}")
 
-FILE(READ file/src/file.h FILE_H_CONTENT)
-STRING(CONCAT FILE_H_CONTENT_NEW "#ifdef WIN32\n#include <unistd.h>\n#include <dirent.h>\n#undef S_IFLNK\n#undef S_IFSOCK\n#endif\n" "${FILE_H_CONTENT}")
-FILE(WRITE file/src/file.h "${FILE_H_CONTENT_NEW}")
+FILE(READ file/src/readelf.c READELF_C_CONTENT)
+STRING(CONCAT READELF_C_CONTENT_NEW "#include <dirent.h>\n" "${READELF_C_CONTENT}")
+FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/readelf.c "${READELF_C_CONTENT_NEW}")
+
+#FILE(READ file/src/file.h FILE_H_CONTENT)
+#STRING(CONCAT FILE_H_CONTENT_NEW "#ifdef WIN32\n#include <unistd.h>\n#include <dirent.h>\n#undef S_IFLNK\n#undef S_IFSOCK\n#endif\n" "${FILE_H_CONTENT}")
+#FILE(WRITE file/src/file.h "${FILE_H_CONTENT_NEW}")
 
 # patch test.c and include <getopt.h>
-FILE(READ file/tests/test.c TEST_C_CONTENT)
-STRING(CONCAT TEST_C_CONTENT_NEW "#include <getopt.h>\n" "${TEST_C_CONTENT}")
-FILE(WRITE file/tests/test.c "${TEST_C_CONTENT_NEW}")
+#FILE(READ file/tests/test.c TEST_C_CONTENT)
+#STRING(CONCAT TEST_C_CONTENT_NEW "#include <getopt.h>\n" "${TEST_C_CONTENT}")
+#FILE(WRITE file/tests/test.c "${TEST_C_CONTENT_NEW}")
 
 find_package(pcre2 REQUIRED)
 

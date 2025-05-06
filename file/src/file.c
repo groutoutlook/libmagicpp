@@ -36,7 +36,6 @@ FILE_RCSID("@(#)$File: file.c,v 1.217 2024/09/29 16:49:25 christos Exp $")
 #endif	/* lint */
 
 #include "magic.h"
-
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
